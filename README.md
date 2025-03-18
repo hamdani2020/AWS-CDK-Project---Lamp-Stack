@@ -1,58 +1,99 @@
+# AWS CDK Project - Lamp Stack
 
-# Welcome to your CDK Python project!
+## 📌 Project Description
 
-This is a blank project for CDK development with Python.
+This project provisions an **Amazon EC2 instance** using **AWS CDK (Python)**. It includes:
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+- A **publicly accessible EC2 instance**.
+- **Monitoring, logging, and observability** using CloudWatch.
+- **Automated SSH Key Pair creation** for secure access.
 
-This project is set up like a standard Python project.  The initialization
-process also creates a virtualenv within this project, stored under the `.venv`
-directory.  To create the virtualenv it assumes that there is a `python3`
-(or `python` for Windows) executable in your path with access to the `venv`
-package. If for any reason the automatic creation of the virtualenv fails,
-you can create the virtualenv manually.
+## 🚀 Prerequisites
 
-To manually create a virtualenv on MacOS and Linux:
+Ensure you have the following installed:
 
-```
-$ python3 -m venv .venv
-```
+- **AWS CLI** (Configured with your AWS credentials)
+- **AWS CDK** (`npm install -g aws-cdk`)
+- **Python 3.8+**
+- **pip and virtualenv**
+- **Git**
 
-After the init process completes and the virtualenv is created, you can use the following
-step to activate your virtualenv.
+## 🛠️ Installation & Setup
 
-```
-$ source .venv/bin/activate
-```
+### 1️⃣ Clone the Repository
 
-If you are a Windows platform, you would activate the virtualenv like this:
-
-```
-% .venv\Scripts\activate.bat
+```sh
+git clone https://github.com/YOUR_GITHUB_USERNAME/AWS-CDK-Project-Lamp-Stack.git
+cd LampWatch
 ```
 
-Once the virtualenv is activated, you can install the required dependencies.
+### 2️⃣ Create a Virtual Environment & Install Dependencies
 
-```
-$ pip install -r requirements.txt
-```
-
-At this point you can now synthesize the CloudFormation template for this code.
-
-```
-$ cdk synth
+```sh
+python -m venv .venv
+source .venv/bin/activate  # On Windows use: .venv\Scripts\activate
+pip install -r requirements.txt
 ```
 
-To add additional dependencies, for example other CDK libraries, just add
-them to your `setup.py` file and rerun the `pip install -r requirements.txt`
-command.
+### 3️⃣ Bootstrap AWS CDK
 
-## Useful commands
+```sh
+cdk bootstrap aws://YOUR_AWS_ACCOUNT_ID/YOUR_AWS_REGION
+```
 
- * `cdk ls`          list all stacks in the app
- * `cdk synth`       emits the synthesized CloudFormation template
- * `cdk deploy`      deploy this stack to your default AWS account/region
- * `cdk diff`        compare deployed stack with current state
- * `cdk docs`        open CDK documentation
+### 4️⃣ Deploy the Stack
 
-Enjoy!
+```sh
+cdk deploy
+```
+
+## 🔄 Updating Your Code & Pushing to GitHub
+
+### 1️⃣ Initialize Git (if not already initialized)
+
+```sh
+git init
+git remote add origin https://github.com/YOUR_GITHUB_USERNAME/AWS-CDK-Project-Lamp-Stack.git
+```
+
+### 2️⃣ Add & Commit Your Changes
+
+```sh
+git add .
+git commit -m "Initial commit - AWS CDK EC2 Provisioning"
+```
+
+### 3️⃣ Push to GitHub
+
+```sh
+git branch -M main
+git push -u origin main
+```
+
+## 🛠️ Common Issues & Fixes
+
+### ❌ Error: "CDKToolkit failed creation"
+
+**Solution:** Delete the existing S3 bucket and re-bootstrap.
+
+```sh
+aws s3 rb s3://cdk-hnb659fds-assets-YOUR_ACCOUNT-YOUR_REGION --force
+cdk bootstrap
+```
+
+### ❌ Error: "LogGroup already exists"
+
+**Solution:** Delete the conflicting log group manually in AWS CloudWatch.
+
+```sh
+aws logs delete-log-group --log-group-name /aws/ec2/lamp
+cdk deploy
+```
+
+## 📜 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 📞 Contact
+
+For any inquiries or issues, reach out via hamdanialhassangandi2020\@gmail.com
